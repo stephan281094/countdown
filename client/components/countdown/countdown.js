@@ -24,7 +24,7 @@ Template.countdown_detail.helpers({
 
 // Rendered
 Template.countdown_add.rendered = () => {
-    $('#date').pickadate({
+    $('#when').pickadate({
         format: 'd mmmm, yyyy'
     });
 };
@@ -34,13 +34,13 @@ Template.countdown_add.events({
     'submit .new-countdown': (event, template) => {
         event.preventDefault();
 
-        let input     = event.target;
-        var date      = input.date.value;
-        var happening = input.happening.value;
+        let input = event.target;
+        var when  = input.when.value;
+        var what  = input.what.value;
 
         let slug = Countdowns.insert({
-            date:      date,
-            happening: happening,
+            when:      when,
+            what:      what,
             createdAt: new Date()
         });
 

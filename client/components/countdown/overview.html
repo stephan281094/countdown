@@ -1,10 +1,18 @@
 <template name="countdown_overview">
-  <h3>List of countdowns</h3>
-  <ul class="list-group">
-    {{#each countdowns}}
-      <a class="list-group-item" href="/{{ _id }}">
-        {{ happening }} ({{ date }})
-      </a>
-    {{/each}}
-  </ul>
+  <h2>List of countdowns</h2>
+
+  {{#if countdowns}}
+    <ul class="list-group">
+      {{#each countdowns}}
+        <a class="list-group-item" href="/{{ _id }}">
+          {{ what }} ({{ date }})
+        </a>
+      {{/each}}
+    </ul>
+  {{ else }}
+    <p>
+      We couldn't find any countdowns. Click <a href="/create">here</a> to
+      create one.
+    </p>
+  {{/if}}
 </template>

@@ -23,3 +23,5 @@ kadira:blaze-layout
 momentjs:moment
 twbs:bootstrap
 fermuch:pickadate
+bootswatch:united
+fourseven:scss
