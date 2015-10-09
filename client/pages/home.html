@@ -1,7 +1,10 @@
 <template name="page_home">
     {{> partial_header}}
     <div class="container">
-        {{> countdown_add}}
-        {{> countdown_overview}}
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          {{> countdown_overview}}
+        </div>
+      </div>
     </div>
 </template>

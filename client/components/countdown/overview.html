@@ -1,11 +1,10 @@
 <template name="countdown_overview">
-    <h3>List of countdowns</h3>
-
-    <ul class="collection">
-        {{#each countdowns}}
-            <li class="collection-item">
-                <a href="/{{ _id }}">{{ happening }} ({{ date }})</a>
-            </li>
-        {{/each}}
-    </ul>
+  <h3>List of countdowns</h3>
+  <ul class="list-group">
+    {{#each countdowns}}
+      <a class="list-group-item" href="/{{ _id }}">
+        {{ happening }} ({{ date }})
+      </a>
+    {{/each}}
+  </ul>
 </template>
