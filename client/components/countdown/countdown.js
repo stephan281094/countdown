@@ -15,7 +15,7 @@ Template.countdown_detail.helpers({
     daysLeft: () => {
         let slug      = FlowRouter.getParam('slug');
         let countdown = Countdowns.findOne({_id: slug});
-        let date      = moment(countdown.date, 'D MMMM, YYYY');
+        let date      = moment(countdown.when, 'D MMMM, YYYY');
         let now       = moment();
 
         return date.diff(now, 'days') + 1;
