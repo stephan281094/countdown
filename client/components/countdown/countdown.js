@@ -23,14 +23,14 @@ Template.countdown_detail.helpers({
 });
 
 // Rendered
-Template.countdown_add.rendered = () => {
+Template.countdown_create.rendered = () => {
     $('#when').pickadate({
         format: 'd mmmm, yyyy'
     });
 };
 
 // Events
-Template.countdown_add.events({
+Template.countdown_create.events({
     'submit .new-countdown': (event, template) => {
         event.preventDefault();
 
