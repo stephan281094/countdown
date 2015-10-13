@@ -1,4 +1,4 @@
-// Helpers
+// Helpers ---------------------------------------------------------------------
 Template.countdown_overview.helpers({
   countdowns: () => {
     return Countdowns.find({}).fetch();
@@ -12,24 +12,32 @@ Template.countdown_detail.helpers({
     return Countdowns.findOne({_id: slug});
   },
 
-  daysLeft: () => {
-    let slug      = FlowRouter.getParam('slug');
-    let countdown = Countdowns.findOne({_id: slug});
-    let date      = moment(countdown.when, 'D MMMM, YYYY');
-    let now       = moment();
-
-    return date.diff(now, 'days') + 1;
+  timeLeft: () => {
+    return Template.instance().timeLeft.get();
   }
 });
 
-// Rendered
+// Created ---------------------------------------------------------------------
+Template.countdown_detail.created = function() {
+  this.timeLeft = new ReactiveVar(getTimeLeft());
+  this.handle   = Meteor.setInterval(() => {
+    this.timeLeft.set(getTimeLeft());
+  }, 1000);
+}
+
+// Destroyed -------------------------------------------------------------------
+Template.countdown_detail.destroyed = function() {
+  Meteor.clearInterval(this.handle);
+}
+
+// Rendered --------------------------------------------------------------------
 Template.countdown_create.rendered = () => {
   $('#when').pickadate({
     format: 'd mmmm, yyyy'
   });
 };
 
-// Events
+// Events ----------------------------------------------------------------------
 Template.countdown_create.events({
   'submit .new-countdown': (event, template) => {
     event.preventDefault();
@@ -55,3 +63,12 @@ Template.countdown_detail.events({
     FlowRouter.go('/');
   }
 });
+
+// Normal functions ------------------------------------------------------------
+function getTimeLeft() {
+  let slug      = FlowRouter.getParam('slug');
+  let countdown = Countdowns.findOne({_id: slug});
+  let date      = moment(countdown.when, 'D MMMM, YYYY');
+
+  return moment.preciseDiff(moment(), date);
+}
