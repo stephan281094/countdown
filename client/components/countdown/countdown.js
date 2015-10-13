@@ -35,18 +35,13 @@ Template.countdown_create.events({
     event.preventDefault();
 
     let input = event.target;
-    var when  = input.when.value;
-    var what  = input.what.value;
+    let when  = input.when.value;
+    let what  = input.what.value;
 
-    let slug = Countdowns.insert({
-      when:      when,
-      what:      what,
-      createdAt: new Date()
-    });
-
-    FlowRouter.go(`/${slug}`);
-
-    $('.new-countdown input[type=text]').val('');
+    Meteor.call('countdownSave', when, what, (error, result) => {
+      FlowRouter.go(`/${result}`);
+      $('.new-countdown input[type=text]').val('');
+    })
   }
 });
 
