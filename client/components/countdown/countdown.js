@@ -1,7 +1,13 @@
 // Helpers ---------------------------------------------------------------------
 Template.countdown_overview.helpers({
   countdowns: () => {
-    return Countdowns.find({}).fetch();
+    let countdowns = Countdowns.find({}, {sort: {when: 1}}).fetch();
+
+    _.each(countdowns, (countdown) => {
+      countdown.when = moment(countdown.when).format('D MMMM, YYYY');
+    });
+
+    return countdowns;
   }
 });
 
@@ -43,7 +49,7 @@ Template.countdown_create.events({
     event.preventDefault();
 
     let input = event.target;
-    let when  = input.when.value;
+    let when  = moment(input.when.value).toDate();
     let what  = input.what.value;
 
     Meteor.call('countdownSave', when, what, (error, result) => {
@@ -58,9 +64,10 @@ Template.countdown_detail.events({
     event.preventDefault();
 
     let slug = FlowRouter.getParam('slug');
-    Countdowns.remove({_id: slug});
-
-    FlowRouter.go('/');
+    Countdowns.remove({_id: slug}, (error) => {
+      FlowRouter.go('/');
+      // Notifications.success('Successfully deleted the countdown.')
+    });
   }
 });
 
@@ -68,7 +75,7 @@ Template.countdown_detail.events({
 function getTimeLeft() {
   let slug      = FlowRouter.getParam('slug');
   let countdown = Countdowns.findOne({_id: slug});
-  let date      = moment(countdown.when, 'D MMMM, YYYY');
+  let date      = moment(countdown.when);
 
   return moment.preciseDiff(moment(), date);
 }
