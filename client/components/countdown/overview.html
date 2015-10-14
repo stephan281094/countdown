@@ -4,14 +4,14 @@
   {{#if countdowns}}
     <ul class="list-group">
       {{#each countdowns}}
-        <a class="list-group-item" href="/{{ _id }}">
+        <a class="list-group-item" href="/countdown/{{ _id }}">
           {{ what }} ({{ when }})
         </a>
       {{/each}}
     </ul>
   {{ else }}
     <p>
-      We couldn't find any countdowns. Click <a href="/create">here</a> to
+      We couldn't find any countdowns. Click <a href="/countdown/create">here</a> to
       create one.
     </p>
   {{/if}}

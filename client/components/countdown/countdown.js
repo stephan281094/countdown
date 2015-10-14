@@ -53,7 +53,7 @@ Template.countdown_create.events({
     let what  = input.what.value;
 
     Meteor.call('countdownSave', when, what, (error, result) => {
-      FlowRouter.go(`/${result}`);
+      FlowRouter.go(`/countdown/${result}`);
       $('.new-countdown input[type=text]').val('');
     })
   }
@@ -77,5 +77,10 @@ function getTimeLeft() {
   let countdown = Countdowns.findOne({_id: slug});
   let date      = moment(countdown.when);
 
-  return moment.preciseDiff(moment(), date);
+  // If countdown has finished
+  if (countdown.when < new Date()) {
+    return false;
+  }
+
+  return moment.preciseDiff(moment(), date) + ' left';
 }
