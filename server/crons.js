@@ -1,9 +1,9 @@
 SyncedCron.add({
   name: 'Clear countdowns that finished',
-  schedule: function(parser) {
+  schedule(parser) {
     return parser.text('at 2:00 am');
   },
-  job: function() {
+  job() {
     Meteor.call('countdownRemoveFinished');
   }
 });

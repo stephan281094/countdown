@@ -1,6 +1,6 @@
 // Helpers ---------------------------------------------------------------------
 Template.countdown_overview.helpers({
-  countdowns: function() {
+  countdowns() {
     let countdowns = Countdowns.find({}, {sort: {when: 1}}).fetch();
 
     _.each(countdowns, (countdown) => {
@@ -12,13 +12,13 @@ Template.countdown_overview.helpers({
 });
 
 Template.countdown_detail.helpers({
-  countdown: function() {
+  countdown() {
     let slug = FlowRouter.getParam('slug');
 
     return Countdowns.findOne({_id: slug});
   },
 
-  timeLeft: function() {
+  timeLeft() {
     return Template.instance().timeLeft.get();
   }
 });
@@ -64,7 +64,7 @@ Template.countdown_detail.events({
     event.preventDefault();
 
     let slug = FlowRouter.getParam('slug');
-    Countdowns.remove({_id: slug}, (error) => {
+    Meteor.call('countdownRemove', slug, (error, result) => {
       FlowRouter.go('/');
       // Notifications.success('Successfully deleted the countdown.')
     });
