@@ -1,6 +1,6 @@
 // Helpers ---------------------------------------------------------------------
 Template.countdown_overview.helpers({
-  countdowns: () => {
+  countdowns: function() {
     let countdowns = Countdowns.find({}, {sort: {when: 1}}).fetch();
 
     _.each(countdowns, (countdown) => {
@@ -12,13 +12,13 @@ Template.countdown_overview.helpers({
 });
 
 Template.countdown_detail.helpers({
-  countdown: () => {
+  countdown: function() {
     let slug = FlowRouter.getParam('slug');
 
     return Countdowns.findOne({_id: slug});
   },
 
-  timeLeft: () => {
+  timeLeft: function() {
     return Template.instance().timeLeft.get();
   }
 });
@@ -37,7 +37,7 @@ Template.countdown_detail.destroyed = function() {
 }
 
 // Rendered --------------------------------------------------------------------
-Template.countdown_create.rendered = () => {
+Template.countdown_create.rendered = function() {
   $('#when').pickadate({
     format: 'd mmmm, yyyy'
   });
@@ -45,7 +45,7 @@ Template.countdown_create.rendered = () => {
 
 // Events ----------------------------------------------------------------------
 Template.countdown_create.events({
-  'submit .new-countdown': (event, template) => {
+  'submit .new-countdown': function(event, template) {
     event.preventDefault();
 
     let input = event.target;
@@ -60,7 +60,7 @@ Template.countdown_create.events({
 });
 
 Template.countdown_detail.events({
-  'click .delete': (event, template) => {
+  'click .delete': function(event, template) {
     event.preventDefault();
 
     let slug = FlowRouter.getParam('slug');
