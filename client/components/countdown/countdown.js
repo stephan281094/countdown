@@ -1,7 +1,11 @@
 // Helpers ---------------------------------------------------------------------
 Template.countdown_overview.helpers({
   countdowns() {
-    let countdowns = Countdowns.find({}, {sort: {when: 1}}).fetch();
+    let countdowns = Countdowns.find({
+      isPrivate: {$ne: true}
+    }, {
+      sort: {when: 1}
+    }).fetch();
 
     if (countdowns) {
       _.each(countdowns, (countdown) => {
@@ -35,11 +39,12 @@ Template.countdown_create.events({
   'submit .new-countdown': function(event, template) {
     event.preventDefault();
 
-    let input = event.target;
-    let when  = moment(input.when.value).toDate();
-    let what  = input.what.value;
+    let input   = event.target;
+    let when    = moment(input.when.value).toDate();
+    let what    = input.what.value;
+    let private = input.private.checked;
 
-    Meteor.call('countdownSave', when, what, (error, result) => {
+    Meteor.call('countdownSave', when, what, private, (error, result) => {
       FlowRouter.go(`/countdown/${result}`);
       $('.new-countdown input[type=text]').val('');
     })
