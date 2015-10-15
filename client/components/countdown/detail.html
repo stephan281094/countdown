@@ -5,11 +5,6 @@
         <a class="delete" href="#">Delete</a>
       </li>
   </ul>
-  {{#if timeLeft}}
-    <h1>{{ timeLeft }}</h1>
-    <h4>until {{ countdown.what }}</h4>
-  {{else}}
-    <h1>The countdown finished</h1>
-    <h4>{{ countdown.what }}</h4>
-  {{/if}}
+  <h1>{{> partial_timeleft date=countdown.when}}</h1>
+  <h4>{{ countdown.what }}</h4>
 </template>

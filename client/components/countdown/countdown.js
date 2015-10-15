@@ -20,25 +20,8 @@ Template.countdown_detail.helpers({
 
     if (countdown)
       return countdown;
-  },
-
-  timeLeft() {
-    return Template.instance().timeLeft.get() +  ' left';
   }
 });
-
-// Created ---------------------------------------------------------------------
-Template.countdown_detail.created = function() {
-  this.timeLeft = new ReactiveVar(getTimeLeft());
-  this.handle   = Meteor.setInterval(() => {
-    this.timeLeft.set(getTimeLeft());
-  }, 1000);
-}
-
-// Destroyed -------------------------------------------------------------------
-Template.countdown_detail.destroyed = function() {
-  Meteor.clearInterval(this.handle);
-}
 
 // Rendered --------------------------------------------------------------------
 Template.countdown_create.rendered = function() {
@@ -74,16 +57,3 @@ Template.countdown_detail.events({
     });
   }
 });
-
-// Normal functions ------------------------------------------------------------
-function getTimeLeft() {
-  let slug      = FlowRouter.getParam('slug');
-  let countdown = Countdowns.findOne({_id: slug});
-
-  // If countdown doesn't exist or has finished
-  if (!countdown || countdown.when < new Date()) {
-    return;
-  }
-
-  return moment.preciseDiff(moment(), moment(countdown.when));
-}
