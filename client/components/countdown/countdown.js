@@ -3,23 +3,27 @@ Template.countdown_overview.helpers({
   countdowns() {
     let countdowns = Countdowns.find({}, {sort: {when: 1}}).fetch();
 
-    _.each(countdowns, (countdown) => {
-      countdown.when = moment(countdown.when).format('D MMMM, YYYY');
-    });
+    if (countdowns) {
+      _.each(countdowns, (countdown) => {
+        countdown.when = moment(countdown.when).format('D MMMM, YYYY');
+      });
 
-    return countdowns;
+      return countdowns;
+    }
   }
 });
 
 Template.countdown_detail.helpers({
   countdown() {
-    let slug = FlowRouter.getParam('slug');
+    let slug      = FlowRouter.getParam('slug');
+    let countdown = Countdowns.findOne({_id: slug});
 
-    return Countdowns.findOne({_id: slug});
+    if (countdown)
+      return countdown;
   },
 
   timeLeft() {
-    return Template.instance().timeLeft.get();
+    return Template.instance().timeLeft.get() +  ' left';
   }
 });
 
@@ -75,12 +79,11 @@ Template.countdown_detail.events({
 function getTimeLeft() {
   let slug      = FlowRouter.getParam('slug');
   let countdown = Countdowns.findOne({_id: slug});
-  let date      = moment(countdown.when);
 
-  // If countdown has finished
-  if (countdown.when < new Date()) {
-    return false;
+  // If countdown doesn't exist or has finished
+  if (!countdown || countdown.when < new Date()) {
+    return;
   }
 
-  return moment.preciseDiff(moment(), date) + ' left';
+  return moment.preciseDiff(moment(), moment(countdown.when));
 }
