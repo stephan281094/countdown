@@ -5,7 +5,7 @@
     <ul class="list-group">
       {{#each countdowns}}
         <a class="list-group-item" href="/countdown/{{ _id }}">
-          {{ what }} ({{ when }})
+          In {{> partial_timeleft date=when precise=false}}: {{ what }}
         </a>
       {{/each}}
     </ul>

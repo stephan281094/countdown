@@ -1,11 +1,19 @@
 Template.partial_timeleft.helpers({
-	timeLeft(date) {
+	timeLeft(date, precise = true) {
 		if (date < new Date()) {
 	    return 'Countdown has finished';
 	  }
 
 		let now = Template.instance().time.get();
-		return moment.preciseDiff(now, moment(date)) + ' left';
+		let timeLeft;
+
+		if (precise === true) {
+			timeLeft = moment.preciseDiff(now, moment(date));
+		} else {
+			timeLeft = moment.duration(moment(date).diff(now)).humanize();
+		}
+
+		return timeLeft;
 	}
 });
 
