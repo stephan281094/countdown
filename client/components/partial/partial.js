@@ -7,7 +7,7 @@ Template.partial_timeleft.helpers({
 		let now = Template.instance().time.get();
 		let timeLeft;
 
-		if (precise === true) {
+		if (precise) {
 			timeLeft = moment.preciseDiff(now, moment(date));
 		} else {
 			timeLeft = moment.duration(moment(date).diff(now)).humanize();
