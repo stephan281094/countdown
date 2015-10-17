@@ -1,4 +1,4 @@
 Meteor.startup(function() {
-	SyncedCron.start();
-	Meteor.call('countdownRemoveFinished');
+  SyncedCron.start();
+  Meteor.call('countdownRemoveFinished');
 });
