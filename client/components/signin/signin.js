@@ -6,9 +6,8 @@ Template.signin.events({
 		let username = input.username.value;
 		let password = input.password.value;
 
-
 		// If user doesn't exist yet
-		if (Match.test(Meteor.users.findOne({username: username}), 'undefined')) {
+		if (Match.test(Meteor.users.findOne({username: username}), undefined)) {
 			Accounts.createUser({
 				username: username,
 				password: password
