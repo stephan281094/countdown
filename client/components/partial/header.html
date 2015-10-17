@@ -9,6 +9,15 @@
             <a href="/countdown/create" class="btn btn-primary" role="button">
               Create countdown
             </a>
+            {{#if currentUser}}
+              <a href="/signout" class="btn btn-default" role="button">
+                Sign out
+              </a>
+            {{ else }}
+              <a href="/signin" class="btn btn-default" role="button">
+                Sign in
+              </a>
+            {{/if}}
           </p>
         </div>
       </div>
