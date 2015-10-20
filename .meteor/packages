@@ -30,3 +30,5 @@ reactive-var
 zhenya:moment-precise-range
 percolate:synced-cron
 accounts-password
+frozeman:global-notifications
+random

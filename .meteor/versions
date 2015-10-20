@@ -32,6 +32,8 @@ es5-shim@4.1.13
 fastclick@1.0.7
 fermuch:pickadate@1.0.0
 fourseven:scss@3.3.3_3
+frozeman:animation-helper@0.2.6
+frozeman:global-notifications@0.2.0
 geojson-utils@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
@@ -43,6 +45,7 @@ jquery@1.11.4
 kadira:blaze-layout@2.1.0
 kadira:flow-router@2.7.0
 launch-screen@1.0.4
+less@2.5.0_3
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8

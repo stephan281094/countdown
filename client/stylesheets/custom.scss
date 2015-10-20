@@ -21,3 +21,19 @@ fieldset[disabled] .form-control {
   float: right;
   color: #ccc;
 }
+
+.global-notification {
+  cursor: pointer;
+  background-color: #fff !important;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  color: #555 !important;
+  border-width: 1px;
+  border-left: 0;
+  border-right: 0;
+  border-style: solid;
+
+  &.success {border-color: #0c0;}
+  &.info    {border-color: #08f;}
+  &.error   {border-color: #c00;}
+  &.warning {border-color: #fc0;}
+}

@@ -45,6 +45,10 @@ Template.countdown_create.events({
     Meteor.call('countdownSave', when, what, private, (error, result) => {
       FlowRouter.go(`/countdown/${result}`);
       $('.new-countdown input[type=text]').val('');
+      GlobalNotifications.success({
+        content: 'You successfully added a countdown!',
+        duration: 3.5
+      });
     })
   }
 });
@@ -56,7 +60,10 @@ Template.countdown_detail.events({
     let slug = FlowRouter.getParam('slug');
     Meteor.call('countdownRemove', slug, (error, result) => {
       FlowRouter.go('/');
-      // Notifications.success('Successfully deleted the countdown.')
+      GlobalNotifications.success({
+        content: 'You successfully deleted a countdown!',
+        duration: 3.5
+      });
     });
   }
 });
