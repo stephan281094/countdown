@@ -2,7 +2,10 @@
 Template.countdown_overview.helpers({
   countdowns() {
     let countdowns = Countdowns.find({
-      isPrivate: {$ne: true}
+      $or: [
+        {isPrivate: {$ne: true}},
+        {createdBy: Meteor.userId()}
+      ]
     }, {
       sort: {when: 1}
     }).fetch();

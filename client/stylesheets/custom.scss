@@ -15,3 +15,9 @@
 fieldset[disabled] .form-control {
   background-color: transparent;
 }
+
+.is-private:after {
+  content: "private";
+  float: right;
+  color: #ccc;
+}

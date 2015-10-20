@@ -4,8 +4,8 @@
   {{#if countdowns}}
     <ul class="list-group">
       {{#each countdowns}}
-        <a class="list-group-item" href="/countdown/{{ _id }}">
-          In {{> partial_timeleft date=when precise=false}}: {{ what }}
+        <a class="list-group-item{{#if isPrivate}} is-private{{/if}}" href="/countdown/{{ _id }}">
+          {{> partial_timeleft date=when precise=false}}: {{ what }}
         </a>
       {{/each}}
     </ul>
