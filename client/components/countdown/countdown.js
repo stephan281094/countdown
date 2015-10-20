@@ -10,13 +10,8 @@ Template.countdown_overview.helpers({
       sort: {when: 1}
     }).fetch();
 
-    if (countdowns) {
-      _.each(countdowns, (countdown) => {
-        countdown.when = moment(countdown.when).format('D MMMM, YYYY');
-      });
-
+    if (countdowns)
       return countdowns;
-    }
   }
 });
 
