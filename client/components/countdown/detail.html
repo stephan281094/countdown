@@ -1,9 +1,10 @@
 <template name="countdown_detail">
   <ul class="pager">
       <li class="previous"><a href="/"><span aria-hidden="true">&larr;</span> Back</a></li>
-      <li class="next">
-        <a class="delete" href="#">Delete</a>
-      </li>
+      <li class="next"><a class="delete" href="#">Delete</a></li>
+      {{#if countdown.isPrivate}}
+        <li class="next"><a class="private" href="#">Private</a></li>
+      {{/if}}
   </ul>
   <h1>{{> partial_timeleft date=countdown.when}}</h1>
   <h4>{{ countdown.what }}</h4>

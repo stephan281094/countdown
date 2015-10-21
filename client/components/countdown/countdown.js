@@ -59,9 +59,25 @@ Template.countdown_detail.events({
 
     let slug = FlowRouter.getParam('slug');
     Meteor.call('countdownRemove', slug, (error, result) => {
+      if (error) return;
+
       FlowRouter.go('/');
       GlobalNotifications.success({
         content: 'You successfully deleted a countdown!',
+        duration: 3.5
+      });
+    });
+  },
+
+  'click .private': function(event, template) {
+    event.preventDefault();
+
+    let slug = FlowRouter.getParam('slug');
+    Meteor.call('countdownMakePublic', slug, (error, result) => {
+      if (error) return;
+
+      GlobalNotifications.success({
+        content: 'You successfully made this countdown public',
         duration: 3.5
       });
     });
