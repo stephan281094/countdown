@@ -12,12 +12,25 @@ Template.signin.events({
         username: username,
         password: password
       }, (error) => {
-        console.log(error);
+        GlobalNotifications.error({
+          content: 'An error occurred while trying to create a new user'
+        });
       });
     }
 
     Meteor.loginWithPassword(username, password, (error) => {
-      if (!error) console.log('User successfully logged in');
+      if (error) {
+        GlobalNotifications.error({
+          content: 'An error occurred while trying to log in'
+        });
+        return;
+      }
+
+      GlobalNotifications.hideAll();
+      GlobalNotifications.success({
+        content: 'You successfully logged in as ' + username,
+        duration: 3.5
+      });
       FlowRouter.go('/');
     });
   }
