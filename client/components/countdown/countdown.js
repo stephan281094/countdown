@@ -32,6 +32,10 @@ Template.countdown_create.rendered = function() {
   });
 };
 
+Template.countdown_detail.rendered = function() {
+  $('[data-toggle="tooltip"]').tooltip();
+}
+
 // Events ----------------------------------------------------------------------
 Template.countdown_create.events({
   'submit .new-countdown': function(event, template) {
