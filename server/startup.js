@@ -1,4 +1,4 @@
-Meteor.startup(function() {
+Meteor.startup(() => {
   SyncedCron.start();
   Meteor.call('countdownRemoveFinished');
 });
