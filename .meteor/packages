@@ -32,4 +32,4 @@ percolate:synced-cron
 accounts-password
 frozeman:global-notifications
 random
-mrt:nprogress
+settinghead:auto-nprogress
