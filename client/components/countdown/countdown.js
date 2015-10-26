@@ -7,7 +7,7 @@ Template.countdown_overview.helpers({
         {createdBy: Meteor.userId()}
       ]
     }, {
-      sort: {when: 1}
+      sort: {when: 1, what: 1}
     }).fetch();
 
     if (countdowns)
