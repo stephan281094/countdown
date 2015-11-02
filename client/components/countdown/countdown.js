@@ -67,7 +67,14 @@ Template.countdown_detail.events({
 
     let slug = FlowRouter.getParam('slug');
     Meteor.call('countdownRemove', slug, (error, result) => {
-      if (error) return;
+      if (error) {
+        GlobalNotifications.error({
+          content: 'Only the owner can remove this countdown',
+          duration: 3.5
+        });
+
+        return;
+      }
 
       FlowRouter.go('/');
       GlobalNotifications.success({
