@@ -31,7 +31,7 @@ Template.countdown_create.rendered = function() {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   $('#when').pickadate({
-    format: 'd mmmm, yyyy',
+    format: 'yyyy-mm-dd',
     min: tomorrow
   });
 };
